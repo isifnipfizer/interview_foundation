@@ -13,7 +13,7 @@ cache:
 
 before_script:
   - cp .env.travis .env
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS laravel_interview;'
   - composer install
   - php artisan migrate
 
