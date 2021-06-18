@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use PDO;
 use config;
 
+/**
+ * Database creation console command.
+ * Purpose is to create the initial database for the application.
+ */
 class CreateDatabaseCommand extends Command
 {
     /**
@@ -42,11 +46,11 @@ class CreateDatabaseCommand extends Command
     public function handle()
     {
 
-        try{
-            
+        try {
+
             $database_name = $this->argument('name') ?: config('database.connections.mysql.database');
-            $charset = config("database.connections.mysql.charset",'utf8mb4');
-            $collation = config("database.connections.mysql.collation",'utf8mb4_unicode_ci');
+            $charset = config("database.connections.mysql.charset", 'utf8mb4');
+            $collation = config("database.connections.mysql.collation", 'utf8mb4_unicode_ci');
 
             config(['database.connections.temp' => [
                 'driver' => config("database.connections.mysql.driver"),
@@ -56,15 +60,15 @@ class CreateDatabaseCommand extends Command
                 'password' => config("database.connections.mysql.password")
             ]]);
 
-            $dbExist = DB::connection('temp')->select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "."'".$database_name."'");
+            $dbExist = DB::connection('temp')->select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = " . "'" . $database_name . "'");
 
-            if(empty($dbExist)){
+            if (empty($dbExist)) {
                 DB::connection('temp')->statement("CREATE DATABASE IF NOT EXISTS $database_name CHARACTER SET $charset COLLATE $collation");
                 $this->info("Database $database_name created");
-            }else{
+            } else {
                 $this->info("Database $database_name already exists");
             }
-        }catch(\Exception $ex){
+        } catch (\Exception $ex) {
             $this->error($ex->getMessage());
         }
         return 0;
