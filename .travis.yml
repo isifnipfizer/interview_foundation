@@ -6,6 +6,10 @@ php:
 services:
   - mysql
 
+env:
+  global:
+    - XDEBUG_MODE=coverage
+
 ## Cache composer
 cache:
   directories:
