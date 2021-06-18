@@ -45,30 +45,27 @@ class CreateDatabaseCommand extends Command
      */
     public function handle()
     {
-        try {
+        $database_name = $this->argument('name') ?: config('database.connections.mysql.database');
+        $charset = config("database.connections.mysql.charset", 'utf8mb4');
+        $collation = config("database.connections.mysql.collation", 'utf8mb4_unicode_ci');
 
-            $database_name = $this->argument('name') ?: config('database.connections.mysql.database');
-            $charset = config("database.connections.mysql.charset", 'utf8mb4');
-            $collation = config("database.connections.mysql.collation", 'utf8mb4_unicode_ci');
-
-            config(['database.connections.temp' => [
+        config(
+            ['database.connections.temp' => [
                 'driver' => config("database.connections.mysql.driver"),
                 'database' => 'mysql',
                 'host' => config("database.connections.mysql.host"),
                 'username' => config("database.connections.mysql.username"),
                 'password' => config("database.connections.mysql.password")
-            ]]);
+            ]]
+        );
 
-            $dbExist = DB::connection('temp')->select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = " . "'" . $database_name . "'");
+        $dbExist = DB::connection('temp')->select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = " . "'" . $database_name . "'");
 
-            if (empty($dbExist)) {
-                DB::connection('temp')->statement("CREATE DATABASE IF NOT EXISTS $database_name CHARACTER SET $charset COLLATE $collation");
-                $this->info("Database $database_name created");
-            } else {
-                $this->info("Database $database_name already exists");
-            }
-        } catch (\Exception $ex) {
-            $this->error($ex->getMessage());
+        if (empty($dbExist)) {
+            DB::connection('temp')->statement("CREATE DATABASE IF NOT EXISTS $database_name CHARACTER SET $charset COLLATE $collation");
+            $this->info("Database $database_name created");
+        } else {
+            $this->info("Database $database_name already exists");
         }
         return 0;
     }
