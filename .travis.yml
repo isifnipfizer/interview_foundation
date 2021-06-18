@@ -6,6 +6,10 @@ php:
 services:
   - mysql
 
+env:
+  global:
+    - XDEBUG_MODE=coverage
+
 ## Cache composer
 cache:
   directories:
@@ -13,9 +17,10 @@ cache:
 
 before_script:
   - cp .env.travis .env
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS laravel_interview;'
   - composer install
   - php artisan migrate
+  - php artisan db:seed
 
 script:
   - vendor/bin/phpcs --standard=psr2 app/
