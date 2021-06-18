@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\TokenTrait;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    use TokenTrait;
     /**
      * Create a new controller instance.
      *
@@ -23,6 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', ["gtoken" => $this->getDecryptedToken()]);
     }
 }

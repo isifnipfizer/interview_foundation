@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -48,7 +49,9 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $user = Auth::loginUsingId(1);
+
+        $user = User::first();
+        $user = Auth::login($user);
 
         $request->session()->regenerate();
 
