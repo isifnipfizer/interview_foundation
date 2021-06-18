@@ -38,7 +38,7 @@ export default {
                 this.addToken()
             },
             async addToken() {
-                axios.post(window.base_url + "addToken", this.$data)
+                axios.post(Laravel.base_url + "addToken", this.$data)
                     .then(response => {
                         this.busy = false
                         this.gtoken = '';

@@ -52,4 +52,5 @@
 
 @push('scripts')
     <script src="{{ asset('js/home.js') }}" defer></script>
+    @include('common.scripts')
 @endpush

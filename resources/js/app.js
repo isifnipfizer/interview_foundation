@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 Vue.use(require('bootstrap-vue'));
 
 /**

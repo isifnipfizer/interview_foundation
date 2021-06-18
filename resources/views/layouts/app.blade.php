@@ -18,7 +18,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @include('common.scripts')
     @stack('scripts')
 </head>
 <body>
