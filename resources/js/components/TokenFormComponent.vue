@@ -8,11 +8,7 @@
         </b-form-group>
         <b-overlay
         :show="busy"
-        rounded
         opacity="0.6"
-        spinner-small
-        spinner-variant="primary"
-        class="d-inline-block"
         >
         <template #overlay>
         <div class="d-flex align-items-center">
@@ -42,21 +38,19 @@ export default {
                 this.addToken()
             },
             async addToken() {
-                //axios.defaults.headers.common['Authorization'] = `Bearer ${this.$auth.getAccessToken()}`
-                //axios.post(API_BASE_URL + '{{url(addToken', this.$data)
                 axios.post(window.base_url + "addToken", this.$data)
                     .then(response => {
                         this.busy = false
                         this.gtoken = '';
-                        //this.$emit('completed', response.data.gtoken)
+                        this.$root.$emit('tokenAdded', response.data.gtoken)
                         console.log(response);
                         $("#gtoken").html( response.data.gtoken);
                         $("#notoken").hide();
-                        $("#formTokenVisibility").toggleClass('d-none');
+                        $("#formTokenVisibility").addClass('d-none');
+                        $("#changeToken").removeClass('d-none');
 
                     })
                     .catch(error => {
-                        // handle authentication and validation errors here
                         this.errors = error.response.data.errors
                         this.busy = false
                     })
