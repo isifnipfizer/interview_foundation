@@ -45,7 +45,6 @@ class CreateDatabaseCommand extends Command
      */
     public function handle()
     {
-
         try {
 
             $database_name = $this->argument('name') ?: config('database.connections.mysql.database');
