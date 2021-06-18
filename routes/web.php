@@ -22,4 +22,5 @@ Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
 Route::group(['middleware' => 'auth'], function()
 {
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/addToken', 'TokenController');
 });
