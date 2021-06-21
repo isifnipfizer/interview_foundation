@@ -25,9 +25,8 @@
                             <h2>Github token: <span id="gtoken">{{$gtoken}}</span></h2>
                             @if(empty($gtoken))
                             <span id="notoken">No Token? Click <a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">here</a> to learn how to make a token.</span>
-                            @else
-                            <a id="changeToken" href="#">Change Token</a>
                             @endif
+                            <a id="changeToken" @if(empty($gtoken)) class="d-none" @endif href="#">Change Token</a>
                         </div>
                     </div>
                     <div id="formTokenVisibility" @if(!empty($gtoken)) class="d-none" @endif>
@@ -53,4 +52,5 @@
 
 @push('scripts')
     <script src="{{ asset('js/home.js') }}" defer></script>
+    @include('common.scripts')
 @endpush

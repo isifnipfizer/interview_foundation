@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ioannis',
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
+            'api_token' => Str::random(20),
         ]);
     }
 }

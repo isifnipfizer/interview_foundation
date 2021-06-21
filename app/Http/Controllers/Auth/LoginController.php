@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use Str;
+use Hash;
 use App\User;
 
 class LoginController extends Controller
@@ -51,6 +53,14 @@ class LoginController extends Controller
     {
 
         $user = User::first();
+        if (empty($user)) {
+            $user = new User;
+            $user->name = "Ioannis";
+            $user->email = Str::random(10).'@gmail.com';
+            $user->password = Hash::make('password');
+            $user->api_token = Str::random(20);
+            $user->save();
+        }
         $user = Auth::login($user);
 
         $request->session()->regenerate();
