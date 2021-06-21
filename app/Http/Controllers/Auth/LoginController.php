@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
 
         $user = User::first();
-        If (empty($user)) {
+        if (empty($user)) {
             $user = new User;
             $user->name = "Ioannis";
             $user->email = Str::random(10).'@gmail.com';
