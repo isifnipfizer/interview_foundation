@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Traits\TokenTrait;
 use Illuminate\Http\Request;
 
+/**
+ * The main dashboard controller of the application.
+ */
 class HomeController extends Controller
 {
     use TokenTrait;

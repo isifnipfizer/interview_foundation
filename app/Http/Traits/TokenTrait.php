@@ -6,6 +6,9 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
+/**
+ * Helper shareable class that has the BL of the tokens. Store and decrypt
+ */
 trait TokenTrait
 {
     public function storeToken(Request $request)

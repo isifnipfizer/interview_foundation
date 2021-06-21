@@ -8,11 +8,14 @@ use Tests\TestCase;
 use Str;
 use App\User;
 
+/**
+ * The Token class to test all the token functionalities 
+ */
 class TokenTest extends TestCase
 {
     use RefreshDatabase;
     /**
-     * A basic feature test example.
+     * Check if a random token can be added.
      *
      * @return void
      */
@@ -31,7 +34,7 @@ class TokenTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * Check the validation rule if no token added
      *
      * @return void
      */

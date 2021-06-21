@@ -6,6 +6,9 @@ use App\Http\Traits\TokenTrait;
 use Illuminate\Http\Request;
 use GrahamCampbell\GitHub\Facades\GitHub;
 
+/**
+ * The Github controller that returns the user starred repositories using the GrahamCampbell library
+ */
 class GithubRepositories extends Controller
 {
     use TokenTrait;

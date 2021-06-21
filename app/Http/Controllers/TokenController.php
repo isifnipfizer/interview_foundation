@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Traits\TokenTrait;
 use Illuminate\Http\Request;
 
+/**
+ * The controller of the addToken route receiving the request and use the Trait class TokenTrait to store it
+ */
 class TokenController extends Controller
 {
     use TokenTrait;
